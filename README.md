@@ -1,6 +1,6 @@
 # Excel-Analytics-Platform
 
-This guide is for **all teammates** working on this project.  
+This guide is for all teammates working on this project.  
 Follow these steps exactly to avoid mistakes and conflicts.
 
 ---
