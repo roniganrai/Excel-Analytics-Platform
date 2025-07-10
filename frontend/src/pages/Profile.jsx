@@ -18,11 +18,14 @@ export default function Profile() {
   // Fetch user profile
   const getProfile = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/user/profile", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
+      const res = await fetch(
+        "https://excel-analytics-platform-430f.onrender.com",
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.msg || "Could not load profile");
