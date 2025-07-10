@@ -14,7 +14,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await fetch(
-        "https://excel-analytics-platform-430f.onrender.com",
+        "https://excel-analytics-platform-430f.onrender.com/api/auth/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

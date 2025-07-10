@@ -17,7 +17,7 @@ export default function Home() {
     const fetchUser = async () => {
       try {
         const res = await fetch(
-          "https://excel-analytics-platform-430f.onrender.com",
+          "https://excel-analytics-platform-430f.onrender.com/api/user/profile",
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
