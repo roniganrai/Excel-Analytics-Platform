@@ -57,7 +57,7 @@ const NavbarMain = ({ onToggleDrawer }) => {
   };
 
   return (
-    <nav className="relative z-10 flex justify-between items-center px-6 py-4 bg-black/80 border-b border-white/20 shadow-md">
+    <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center px-6 py-4 bg-black/80 border-b border-white/20 shadow-md backdrop-blur-md">
       {/* ☰ Sidebar Toggle + Logo */}
       <div className="flex items-center gap-4">
         <button
