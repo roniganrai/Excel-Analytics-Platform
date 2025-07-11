@@ -18,11 +18,14 @@ export default function Profile() {
   // Fetch user profile
   const getProfile = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/user/profile", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
+      const res = await fetch(
+        "https://excel-analytics-platform-akuc.onrender.com/api/user/profile",
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.msg || "Could not load profile");
@@ -42,14 +45,17 @@ export default function Profile() {
 
   const handleUpdate = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/user/update", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-        body: JSON.stringify({ name: nameInput }),
-      });
+      const res = await fetch(
+        "https://excel-analytics-platform-akuc.onrender.com/api/user/update",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          body: JSON.stringify({ name: nameInput }),
+        }
+      );
 
       if (!res.ok) throw new Error("Profile update failed");
 

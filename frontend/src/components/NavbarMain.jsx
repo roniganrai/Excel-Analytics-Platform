@@ -13,11 +13,14 @@ const NavbarMain = ({ onToggleDrawer }) => {
   // Fetch current user profile
   const fetchProfile = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/user/profile", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
+      const res = await fetch(
+        "https://excel-analytics-platform-akuc.onrender.com/api/user/profile",
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
 
       if (!res.ok) throw new Error("Unable to fetch user");
       const data = await res.json();
