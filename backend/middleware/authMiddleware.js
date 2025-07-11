@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // Attach decoded payload (userId, role, etc.)
+    req.user = decoded; // Attach decoded payload (userId, etc.)
     next();
   } catch (err) {
     console.error("❌ JWT Error:", err.message);

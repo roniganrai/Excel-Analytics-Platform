@@ -5,13 +5,13 @@ const UserSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      trim: true, // ✅ Trims extra spaces
+      trim: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      lowercase: true, // ✅ Converts to lowercase
+      lowercase: true,
       trim: true,
     },
     password: {
@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // 🕒 createdAt & updatedAt fields
+    timestamps: true,
   }
 );
 
