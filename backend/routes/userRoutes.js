@@ -6,7 +6,7 @@ const User = require("../models/User");
 // 👤 GET: Logged-in user profile
 router.get("/profile", verifyToken, async (req, res) => {
   try {
-    const profile = await User.findById(req.user.userId).select("-password");
+    const profile = await User.findById(req.user.id).select("-password");
     if (!profile) {
       return res.status(404).json({ msg: "User profile not found" });
     }
@@ -22,7 +22,7 @@ router.put("/update", verifyToken, async (req, res) => {
   try {
     const { name } = req.body;
     const updatedUser = await User.findByIdAndUpdate(
-      req.user.userId,
+      req.user.id,
       { name },
       { new: true }
     ).select("-password");
