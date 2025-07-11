@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Plot from "react-plotly.js";
+import detectiveBg from "../assests/b.gif";
 
 import { Bar, Pie, Line, Radar, Doughnut } from "react-chartjs-2";
 import {
@@ -22,8 +23,6 @@ import { Link } from "react-router-dom";
 import NavbarMain from "../components/NavbarMain";
 import SidebarDrawer from "../components/SidebarDrawer";
 import Footer from "../components/Footer";
-
-import detectiveBg from "../assests/b.gif";
 
 // Register Chart.js components
 ChartJS.register(
