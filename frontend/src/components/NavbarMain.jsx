@@ -57,9 +57,9 @@ const NavbarMain = ({ onToggleDrawer }) => {
   };
 
   return (
-    <main className="pt-20">
-      <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center px-6 py-4 bg-black/80 border-b border-white/20 shadow-md backdrop-blur-md">
-        {/* ☰ Sidebar Toggle + Logo */}
+    <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center px-6 py-4 bg-black/80 border-b border-white/20 shadow-md backdrop-blur-md">
+      {/* ☰ Sidebar Toggle + Logo */}
+      <main className="pt-20">
         <div className="flex items-center gap-4">
           <button
             onClick={onToggleDrawer}
@@ -153,8 +153,8 @@ const NavbarMain = ({ onToggleDrawer }) => {
             </div>
           )}
         </div>
-      </nav>
-    </main>
+      </main>
+    </nav>
   );
 };
 
