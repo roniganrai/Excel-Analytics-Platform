@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import NavbarMain from "../components/NavbarMain";
 import SidebarDrawer from "../components/SidebarDrawer";
@@ -105,9 +106,9 @@ export default function Chat() {
           <a href="/upload" className="btn-glow text-sm px-4 py-1">
             📁 Upload
           </a>
-          <a href="/charts" className="btn-glow text-sm px-4 py-1">
+          <Link to="/charts" className="btn-glow text-sm px-4 py-1">
             📊 Charts
-          </a>
+          </Link>
         </div>
 
         {/* 🧠 Response Area */}

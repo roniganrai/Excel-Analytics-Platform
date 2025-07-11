@@ -44,7 +44,7 @@ export default function Settings() {
                 <strong>Name:</strong> DefaultUser
               </p>
               <p>
-                <strong>Email:</strong> user@examole.com
+                <strong>Email:</strong> user@example.com
               </p>
               <button className="detective-btn mt-3">🔑 Change Password</button>
             </div>
