@@ -6,6 +6,7 @@ import logo from "../assests/excel-icon.png";
 const NavbarMain = ({ onToggleDrawer }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [userName, setUserName] = useState("");
+  const [role, setRole] = useState("");
   const [loading, setLoading] = useState(true);
   const dropdownRef = useRef();
   const navigate = useNavigate();
@@ -24,7 +25,9 @@ const NavbarMain = ({ onToggleDrawer }) => {
 
       if (!res.ok) throw new Error("Unable to fetch user");
       const data = await res.json();
+      console.log("PROFILE:", data);
       setUserName(data.name);
+      setRole(data.role);
     } catch (error) {
       console.warn("Profile fetch error:", error.message);
       setUserName("Agent");
@@ -125,6 +128,18 @@ const NavbarMain = ({ onToggleDrawer }) => {
                   ⚙️ Settings
                 </Link>
               </li>
+              {/* 🛠️ Admin Panel (Only for Admins) */}
+              {role === "admin" && (
+                <li>
+                  <Link
+                    to="/admin"
+                    className="block px-4 py-2 hover:bg-cyan-700 transition"
+                    onClick={() => setShowDropdown(false)}
+                  >
+                    🛠️ Admin Panel
+                  </Link>
+                </li>
+              )}
               <li>
                 <button
                   onClick={handleLogout}

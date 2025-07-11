@@ -13,9 +13,16 @@ const register = async (req, res) => {
       return res.status(400).json({ msg: "User already exists" });
     }
 
-    // Encrypt password before saving
+    // Encrypt password
     const hashedPwd = await bcrypt.hash(password, 10);
-    const user = new User({ name, email, password: hashedPwd });
+
+    // Create user with default role = 'user'
+    const user = new User({
+      name,
+      email,
+      password: hashedPwd,
+      role: "user", // 👈 default role set here
+    });
 
     await user.save();
 
@@ -42,7 +49,11 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { userId: existingUser._id, name: existingUser.name },
+      {
+        userId: existingUser._id,
+        name: existingUser.name,
+        role: existingUser.role, // 👈 include role in token
+      },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -52,6 +63,7 @@ const login = async (req, res) => {
       user: {
         name: existingUser.name,
         email: existingUser.email,
+        role: existingUser.role, // 👈 return role here
       },
     });
   } catch (err) {

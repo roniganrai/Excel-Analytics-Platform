@@ -17,6 +17,8 @@ import History from "./pages/History";
 import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import RequireAdmin from "./components/RequireAdmin";
+import AdminPanel from "./pages/AdminPanel";
 
 // 🛡️ Route Guard
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -29,6 +31,7 @@ export default function App() {
         <Route path="/" element={<RealmGate />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/admin" element={<AdminPanel />} />
 
         {/* 🔒 Secured Routes */}
         <Route
@@ -37,6 +40,14 @@ export default function App() {
             <ProtectedRoute>
               <Home />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <RequireAdmin>
+              <AdminPanel />
+            </RequireAdmin>
           }
         />
         <Route

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const verifyToken = require("../middleware/authMiddleware");
+const adminMiddleware = require("../middleware/adminMiddleware");
 const User = require("../models/User");
 
 // 👤 GET: Fetch logged-in user profile
@@ -33,6 +34,17 @@ router.put("/update", verifyToken, async (req, res) => {
   } catch (error) {
     console.error("Error updating profile:", error);
     res.status(500).json({ msg: "Profile update failed" });
+  }
+});
+
+// 🛠️ GET: All users (admin-only)
+router.get("/all", verifyToken, adminMiddleware, async (req, res) => {
+  try {
+    const users = await User.find().select("-password");
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Error fetching all users:", error);
+    res.status(500).json({ msg: "Failed to fetch users" });
   }
 });
 
