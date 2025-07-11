@@ -128,18 +128,6 @@ const NavbarMain = ({ onToggleDrawer }) => {
                   ⚙️ Settings
                 </Link>
               </li>
-              {/* 🛠️ Admin Panel (Only for Admins) */}
-              {role === "admin" && (
-                <li>
-                  <Link
-                    to="/admin"
-                    className="block px-4 py-2 hover:bg-cyan-700 transition"
-                    onClick={() => setShowDropdown(false)}
-                  >
-                    🛠️ Admin Panel
-                  </Link>
-                </li>
-              )}
               <li>
                 <button
                   onClick={handleLogout}
