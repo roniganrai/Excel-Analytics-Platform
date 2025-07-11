@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // 📄 Pages
 import RealmGate from "./pages/Gate";
@@ -17,37 +12,29 @@ import History from "./pages/History";
 import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
-import RequireAdmin from "./components/RequireAdmin";
 import AdminPanel from "./pages/AdminPanel";
+import NotFound from "./pages/NotFound";
 
 // 🛡️ Route Guard
 import ProtectedRoute from "./components/ProtectedRoute";
+import RequireAdmin from "./components/RequireAdmin";
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        {/* 🌍 Public Pages */}
+        {/* 🌍 Public Routes */}
         <Route path="/" element={<RealmGate />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/admin" element={<AdminPanel />} />
 
-        {/* 🔒 Secured Routes */}
+        {/* 🔐 Protected Routes */}
         <Route
           path="/home"
           element={
             <ProtectedRoute>
               <Home />
             </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <RequireAdmin>
-              <AdminPanel />
-            </RequireAdmin>
           }
         />
         <Route
@@ -98,9 +85,17 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/admin"
+          element={
+            <RequireAdmin>
+              <AdminPanel />
+            </RequireAdmin>
+          }
+        />
 
-        {/* 🧭 Fallback to Home if route is unknown */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* ❌ Not Found */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
