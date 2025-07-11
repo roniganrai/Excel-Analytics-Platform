@@ -41,10 +41,10 @@ export default function Settings() {
             </h3>
             <div className="space-y-2 text-cyan-100">
               <p>
-                <strong>Name:</strong> DetectiveUser
+                <strong>Name:</strong> DefaultUser
               </p>
               <p>
-                <strong>Email:</strong> agent@casefile.com
+                <strong>Email:</strong> user@examole.com
               </p>
               <button className="detective-btn mt-3">🔑 Change Password</button>
             </div>
