@@ -6,7 +6,16 @@ const cors = require("cors");
 const app = express();
 
 // ✅ Middleware setup
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000", // your local frontend
+      "https://excel-analytics-web.onrender.com", // your deployed frontend
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // ✅ Route imports
