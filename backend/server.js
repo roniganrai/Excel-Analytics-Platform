@@ -6,12 +6,11 @@ const cors = require("cors");
 const app = express();
 
 // ✅ Middleware setup
-// app.use(cors());
 app.use(
   cors({
     origin: [
-      "http://localhost:3000", // your local frontend
-      "https://excel-analytics-web.onrender.com", // your deployed frontend
+      "http://localhost:3000",
+      "https://excel-analytics-web.onrender.com",
     ],
     credentials: true,
   })
@@ -23,15 +22,12 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/userRoutes");
 
 // ✅ Use routes
-app.use("/api/auth", authRoutes); // 🔐 Auth: /register, /login
-app.use("/api/user", userRoutes); // 👤 Profile: /profile, /update
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 // ✅ Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("📦 MongoDB connected successfully"))
   .catch((error) => console.error("❌ DB Connection Failed:", error.message));
 
