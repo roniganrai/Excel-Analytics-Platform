@@ -103,9 +103,9 @@ export default function Chat() {
           >
             💡 Try: Highest?
           </button>
-          <a href="/upload" className="btn-glow text-sm px-4 py-1">
+          <Link to="/upload" className="btn-glow text-sm px-4 py-1">
             📁 Upload
-          </a>
+          </Link>
           <Link to="/charts" className="btn-glow text-sm px-4 py-1">
             📊 Charts
           </Link>
