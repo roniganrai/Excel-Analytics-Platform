@@ -158,7 +158,6 @@ export default function Profile() {
           </div>
         )}
       </main>
-
       <Footer />
     </div>
   );

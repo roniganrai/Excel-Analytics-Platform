@@ -6,7 +6,6 @@ import logo from "../assets/excel-icon.png";
 const NavbarMain = ({ onToggleDrawer }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [userName, setUserName] = useState("");
-  const [role, setRole] = useState("");
   const [loading, setLoading] = useState(true);
   const dropdownRef = useRef();
   const navigate = useNavigate();
@@ -27,7 +26,6 @@ const NavbarMain = ({ onToggleDrawer }) => {
       const data = await res.json();
       console.log("PROFILE:", data);
       setUserName(data.name);
-      setRole(data.role);
     } catch (error) {
       console.warn("Profile fetch error:", error.message);
       setUserName("Agent");
