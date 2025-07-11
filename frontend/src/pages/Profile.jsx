@@ -45,14 +45,17 @@ export default function Profile() {
 
   const handleUpdate = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/user/update", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-        body: JSON.stringify({ name: nameInput }),
-      });
+      const res = await fetch(
+        "https://excel-analytics-platform-430f.onrender.com/api/user/update",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          body: JSON.stringify({ name: nameInput }),
+        }
+      );
 
       if (!res.ok) throw new Error("Profile update failed");
 
