@@ -5,14 +5,13 @@ const verifyToken = require("../middleware/authMiddleware");
 const adminMiddleware = require("../middleware/adminMiddleware");
 const User = require("../models/User");
 
-// 👤 GET: Fetch logged-in user profile
+// 👤 GET: Logged-in user profile
 router.get("/profile", verifyToken, async (req, res) => {
   try {
-    const profile = await User.findById(req.user.id).select("-password");
+    const profile = await User.findById(req.user.userId).select("-password");
     if (!profile) {
       return res.status(404).json({ msg: "User profile not found" });
     }
-
     res.status(200).json(profile);
   } catch (error) {
     console.error("Error fetching user profile:", error);
@@ -20,13 +19,12 @@ router.get("/profile", verifyToken, async (req, res) => {
   }
 });
 
-// ✏️ PUT: Update user name
+// ✏️ PUT: Update user's name
 router.put("/update", verifyToken, async (req, res) => {
   try {
     const { name } = req.body;
-
     const updatedUser = await User.findByIdAndUpdate(
-      req.user.id,
+      req.user.userId,
       { name },
       { new: true }
     ).select("-password");
@@ -38,6 +36,7 @@ router.put("/update", verifyToken, async (req, res) => {
   }
 });
 
+// 🔐 GET: Admin-only - fetch all users
 router.get("/all", verifyToken, adminMiddleware, getAllUsers);
 
 module.exports = router;

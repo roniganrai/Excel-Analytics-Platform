@@ -2,36 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 export default function RequireAdmin({ children }) {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [profile, setProfile] = useState(null);
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    const checkAdmin = async () => {
-      try {
-        const res = await fetch(
-          "https://excel-analytics-platform-430f.onrender.com/api/user/profile",
-          {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-          }
-        );
-
-        const data = await res.json();
-        setIsAdmin(data.role === "admin");
-      } catch (err) {
-        console.error("Admin check error:", err.message);
-      } finally {
-        setChecked(true);
-      }
-    };
-
-    checkAdmin();
+    const storedProfile = localStorage.getItem("profile");
+    if (storedProfile) {
+      setProfile(JSON.parse(storedProfile));
+    }
+    setChecking(false);
   }, []);
 
-  if (!checked) return <div className="text-white p-4">Checking access...</div>;
+  if (checking) return <div className="text-white p-4">Checking access...</div>;
 
-  if (!isAdmin) return <Navigate to="/home" replace />;
+  if (!profile || profile.role !== "admin") {
+    return <Navigate to="/home" replace />;
+  }
 
-  return children;
+  return <>{children}</>;
 }

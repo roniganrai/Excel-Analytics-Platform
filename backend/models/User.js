@@ -5,13 +5,14 @@ const UserSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      trim: true, // Remove extra spaces
+      trim: true, // ✅ Trims extra spaces
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      lowercase: true, // Normalize emails
+      lowercase: true, // ✅ Converts to lowercase
+      trim: true,
     },
     password: {
       type: String,
@@ -20,11 +21,11 @@ const UserSchema = new mongoose.Schema(
     role: {
       type: String,
       enum: ["user", "admin"],
-      default: "user", // every new user will be a normal user unless changed manually
+      default: "user", // 👤 Default to regular user
     },
   },
   {
-    timestamps: true, // Automatically manages createdAt & updatedAt
+    timestamps: true, // 🕒 createdAt & updatedAt fields
   }
 );
 

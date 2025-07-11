@@ -29,7 +29,10 @@ export default function Login() {
         return;
       }
 
+      // ✅ Store token and profile
       localStorage.setItem("token", result.token);
+      localStorage.setItem("profile", JSON.stringify(result.user)); // assuming backend returns result.user
+
       alert("✅ Logged in successfully!");
       navigate("/home");
     } catch (err) {
