@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import bg from "../assests/b.gif";
+import bg from "../assets/b.gif";
 import Navbar from "../components/NavbarAuth";
 import Footer from "../components/Footer";
 

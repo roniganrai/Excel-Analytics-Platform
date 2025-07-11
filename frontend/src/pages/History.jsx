@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import NavbarMain from "../components/NavbarMain";
 import SidebarDrawer from "../components/SidebarDrawer";
 import Footer from "../components/Footer";
-import detectiveBg from "../assests/b.gif";
-import excelIcon from "../assests/excel-icon.png";
+import detectiveBg from "../assets/b.gif";
+import excelIcon from "../assets/excel-icon.png";
 
 export default function History() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

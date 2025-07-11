@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import avatar from "../assests/detective.png"; // Custom avatar image
-import logo from "../assests/excel-icon.png";
+import avatar from "../assets/detective.png"; // Custom avatar image
+import logo from "../assets/excel-icon.png";
 
 const NavbarAuth = () => {
   return (

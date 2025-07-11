@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import gateBg from "../assests/b.gif";
+import gateBg from "../assets/b.gif";
 
 export default function Gate() {
   const navigate = useNavigate();

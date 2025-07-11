@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import NavbarMain from "../components/NavbarMain";
 import SidebarDrawer from "../components/SidebarDrawer";
 import Footer from "../components/Footer";
-import detectiveBg from "../assests/b.gif";
-import avatar from "../assests/detective.png";
+import detectiveBg from "../assets/b.gif";
+import avatar from "../assets/detective.png";
 
 export default function Profile() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

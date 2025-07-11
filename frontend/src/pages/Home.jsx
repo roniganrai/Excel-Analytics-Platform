@@ -1,8 +1,8 @@
 // src/pages/Home.jsx
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import detectiveBg from "../assests/b.gif";
-// import magnifier from "../assests/detective.png";
+import detectiveBg from "../assets/b.gif";
+// import magnifier from "../assets/detective.png";
 import NavbarMain from "../components/NavbarMain";
 import SidebarDrawer from "../components/SidebarDrawer";
 import Footer from "../components/Footer";

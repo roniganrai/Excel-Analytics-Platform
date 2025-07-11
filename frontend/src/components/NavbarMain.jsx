@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import userAvatar from "../assests/detective.png";
-import logo from "../assests/excel-icon.png";
+import userAvatar from "../assets/detective.png";
+import logo from "../assets/excel-icon.png";
 
 const NavbarMain = ({ onToggleDrawer }) => {
   const [showDropdown, setShowDropdown] = useState(false);

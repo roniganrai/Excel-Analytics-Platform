@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import NavbarMain from "../components/NavbarMain";
 import SidebarDrawer from "../components/SidebarDrawer";
 import Footer from "../components/Footer";
-import detectiveBg from "../assests/b.gif";
+import detectiveBg from "../assets/b.gif";
 
 export default function Chat() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

@@ -10,7 +10,7 @@ export default function Settings() {
     <div
       className="min-h-screen text-white font-detective relative overflow-x-hidden"
       style={{
-        backgroundImage: `url(/src/assests/b.gif)`,
+        backgroundImage: `url(/src/assets/b.gif)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

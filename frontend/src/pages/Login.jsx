@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import detectiveBg from "../assests/b.gif";
+import detectiveBg from "../assets/b.gif";
 import Navbar from "../components/NavbarAuth";
 import Footer from "../components/Footer";
 

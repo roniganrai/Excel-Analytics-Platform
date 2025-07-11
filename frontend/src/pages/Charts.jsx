@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Plot from "react-plotly.js";
-import detectiveBg from "../assests/b.gif";
+import detectiveBg from "../assets/b.gif";
 
 import { Bar, Pie, Line, Radar, Doughnut } from "react-chartjs-2";
 import {

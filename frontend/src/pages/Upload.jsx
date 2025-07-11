@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as XLSX from "xlsx";
-import detectiveBg from "../assests/b.gif";
-import excelIcon from "../assests/excel-icon.png";
+import detectiveBg from "../assets/b.gif";
+import excelIcon from "../assets/excel-icon.png";
 import NavbarMain from "../components/NavbarMain";
 import SidebarDrawer from "../components/SidebarDrawer";
 import Footer from "../components/Footer";
