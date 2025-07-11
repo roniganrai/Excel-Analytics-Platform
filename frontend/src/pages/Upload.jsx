@@ -1,3 +1,4 @@
+// src/pages/Upload.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as XLSX from "xlsx";
@@ -17,19 +18,19 @@ export default function Upload() {
 
   const validExtensions = [".xls", ".xlsx"];
 
+  // 📁 File Validation
   const handleFileChange = (file) => {
-    const extension = file.name
-      .substring(file.name.lastIndexOf("."))
-      .toLowerCase();
-    if (!validExtensions.includes(extension)) {
+    const ext = file.name.substring(file.name.lastIndexOf(".")).toLowerCase();
+    if (!validExtensions.includes(ext)) {
       setErrorMsg("⚠️ Please upload a valid Excel file (.xls or .xlsx)");
       setSelectedFile(null);
-      return;
+    } else {
+      setErrorMsg("");
+      setSelectedFile(file);
     }
-    setErrorMsg("");
-    setSelectedFile(file);
   };
 
+  // ⬇️ Drag-n-Drop support
   const handleDrop = (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
@@ -41,8 +42,10 @@ export default function Upload() {
     if (file) handleFileChange(file);
   };
 
+  // 🚀 Trigger File Upload and Navigate
   const handleUpload = () => {
     if (!selectedFile) return;
+
     setIsLoading(true);
     setProgress(0);
 
@@ -52,29 +55,28 @@ export default function Upload() {
       const workbook = XLSX.read(data, { type: "array" });
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
-      const previewData = jsonData.slice(0, 100);
+      const preview = jsonData.slice(0, 100);
 
       try {
-        localStorage.setItem("excelData", JSON.stringify(previewData));
+        localStorage.setItem("excelData", JSON.stringify(preview));
       } catch (err) {
-        alert("🛑 File too large. Please try a smaller file.");
+        alert("🛑 File too large. Try a smaller one.");
         setIsLoading(false);
         return;
       }
 
       const url = URL.createObjectURL(selectedFile);
-      const uploadEntry = {
+      const uploadMeta = {
         name: selectedFile.name,
         size: selectedFile.size,
         date: new Date().toISOString(),
         url,
       };
 
-      const prevHistory =
-        JSON.parse(localStorage.getItem("uploadHistory")) || [];
+      const history = JSON.parse(localStorage.getItem("uploadHistory")) || [];
       localStorage.setItem(
         "uploadHistory",
-        JSON.stringify([uploadEntry, ...prevHistory])
+        JSON.stringify([uploadMeta, ...history])
       );
 
       const interval = setInterval(() => {
@@ -105,7 +107,6 @@ export default function Upload() {
       }}
     >
       <div className="absolute inset-0 bg-black/80 backdrop-blur-md z-0" />
-
       <NavbarMain onToggleDrawer={() => setIsDrawerOpen(true)} />
       <SidebarDrawer
         isOpen={isDrawerOpen}
@@ -114,23 +115,22 @@ export default function Upload() {
 
       <main className="relative z-10 px-6 py-12 max-w-3xl mx-auto">
         <h2 className="text-4xl font-bold text-center text-cyan-400 mb-6 animate-typewriter">
-          Ready for your data mission ?
+          Ready for your data mission?
         </h2>
 
-        {/* Instructions */}
+        {/* 📝 Upload Guidelines */}
         <div className="bg-black/60 p-4 rounded-md border border-cyan-500 mb-10">
           <h3 className="text-cyan-300 font-semibold text-lg mb-2">
             📋 Upload Rules:
           </h3>
           <ul className="list-disc pl-5 text-sm space-y-1">
-            <li>Only Excel files (.xls, .xlsx) accepted</li>
-            <li>Only first 100 rows analyzed</li>
-            <li>Drag & drop works too!</li>
-            <li>Magic happens instantly ✨</li>
+            <li>Only Excel files (.xls, .xlsx)</li>
+            <li>Only first 100 rows will be processed</li>
+            <li>You can drag & drop or manually select files</li>
           </ul>
         </div>
 
-        {/* Upload Zone */}
+        {/* 📤 Upload Box */}
         <div
           className="border-2 border-dashed border-cyan-500 p-8 rounded-xl bg-black/70 text-center"
           onDrop={handleDrop}
@@ -160,7 +160,6 @@ export default function Upload() {
             </button>
           </div>
 
-          {/* File Info */}
           {selectedFile && (
             <div className="mt-6 bg-black/70 border border-cyan-400 rounded-lg p-4 flex items-center gap-4 justify-center">
               <img src={excelIcon} alt="Excel Icon" className="w-8 h-8" />
@@ -173,10 +172,8 @@ export default function Upload() {
             </div>
           )}
 
-          {/* Error */}
           {errorMsg && <p className="text-red-400 text-sm mt-4">{errorMsg}</p>}
 
-          {/* Progress */}
           {isLoading && (
             <div className="w-full bg-cyan-900/30 rounded-full h-3 mt-6">
               <div
@@ -187,16 +184,16 @@ export default function Upload() {
           )}
         </div>
 
-        {/* Back link */}
         <div className="text-center mt-8 text-cyan-100 text-sm">
           <Link to="/home" className="underline hover:text-cyan-300">
-            ← Go back to dashboard
+            ← Back to Dashboard
           </Link>
         </div>
       </main>
 
       <Footer />
 
+      {/* 🎨 Styling */}
       <style>{`
         .font-detective {
           font-family: 'Courier New', Courier, monospace;

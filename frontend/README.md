@@ -9,7 +9,7 @@ Welcome to **Excel Analytics Platform** – a web-based tool that allows users t
 ## 🚀 Features
 
 - 📁 Upload Excel `.xlsx` files
-- 📊 Analyze data with interactive charts
+- 📊 Analyze data with interactive charts,3D charts also
 - 🤖 Ask AI: "What is the highest revenue?" and get instant results
 - 🧠 User profile, history, settings
 - 🧩 Protected routes using JWT authentication
@@ -31,3 +31,4 @@ Welcome to **Excel Analytics Platform** – a web-based tool that allows users t
    ```bash
    git clone https://github.com/your-username/excel-analytics-platform.git
    cd excel-analytics-platform
+   ```

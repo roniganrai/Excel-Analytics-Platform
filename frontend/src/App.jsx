@@ -1,3 +1,4 @@
+// src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -13,19 +14,19 @@ import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 
-// 🛡️ Route Guard
+// 🔒 Route Protection
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        {/* 🌍 Public Routes */}
+        {/* 🌐 Public Routes */}
         <Route path="/" element={<RealmGate />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* 🔐 Protected Routes */}
+        {/* 🔐 Private Routes */}
         <Route
           path="/home"
           element={

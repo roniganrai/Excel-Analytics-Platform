@@ -1,3 +1,4 @@
+// src/pages/Settings.jsx
 import React, { useState } from "react";
 import NavbarMain from "../components/NavbarMain";
 import SidebarDrawer from "../components/SidebarDrawer";
@@ -15,26 +16,24 @@ export default function Settings() {
         backgroundPosition: "center",
       }}
     >
-      {/* Dimmed overlay */}
+      {/* 🔲 Dimmed background */}
       <div className="absolute inset-0 bg-black/80 backdrop-blur-md z-0" />
 
-      {/* Header Nav */}
+      {/* 🔗 Navigation */}
       <NavbarMain onToggleDrawer={() => setIsDrawerOpen(true)} />
-
-      {/* Sidebar Navigation */}
       <SidebarDrawer
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
       />
 
-      {/* Main Content */}
+      {/* ⚙️ Settings Content */}
       <main className="relative z-10 px-6 py-10">
         <h2 className="text-4xl text-cyan-300 font-bold text-center mb-10 float-bounce">
           🛠️ User Preferences
         </h2>
 
         <div className="max-w-3xl mx-auto space-y-10">
-          {/* Profile Info */}
+          {/* 👤 Profile Info */}
           <section className="bg-black/60 p-6 rounded-lg border border-cyan-500 shadow-md">
             <h3 className="text-2xl text-cyan-200 font-semibold mb-4">
               👤 My Info
@@ -50,7 +49,7 @@ export default function Settings() {
             </div>
           </section>
 
-          {/* Settings */}
+          {/* 🛠️ Platform Preferences */}
           <section className="bg-black/60 p-6 rounded-lg border border-cyan-500 shadow-md">
             <h3 className="text-2xl text-cyan-200 font-semibold mb-4">
               🔧 Platform Settings
@@ -67,7 +66,7 @@ export default function Settings() {
             </div>
           </section>
 
-          {/* Theme Switch */}
+          {/* 🎨 Theme Option */}
           <section className="bg-black/60 p-6 rounded-lg border border-cyan-500 shadow-md">
             <h3 className="text-2xl text-cyan-200 font-semibold mb-4">
               🎨 Appearance
@@ -80,10 +79,8 @@ export default function Settings() {
         </div>
       </main>
 
-      {/* App Footer */}
       <Footer />
 
-      {/* Inline Styling */}
       <style>{`
         .detective-btn {
           background: linear-gradient(135deg, #84cc16, #3f6212);
