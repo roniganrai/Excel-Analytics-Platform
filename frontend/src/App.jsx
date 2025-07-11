@@ -13,7 +13,7 @@ import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import AdminPanel from "./pages/AdminPanel";
-import NotFound from "./pages/NotFound";
+// import NotFound from "./pages/NotFound";
 
 // 🛡️ Route Guard
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -93,9 +93,6 @@ export default function App() {
             </RequireAdmin>
           }
         />
-
-        {/* ❌ Not Found */}
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
