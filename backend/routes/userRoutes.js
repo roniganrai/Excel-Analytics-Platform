@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { getAllUsers } = require("../controllers/userController");
 const verifyToken = require("../middleware/authMiddleware");
 const adminMiddleware = require("../middleware/adminMiddleware");
 const User = require("../models/User");
@@ -37,15 +38,6 @@ router.put("/update", verifyToken, async (req, res) => {
   }
 });
 
-// 🛠️ GET: All users (admin-only)
-router.get("/all", verifyToken, adminMiddleware, async (req, res) => {
-  try {
-    const users = await User.find().select("-password");
-    res.status(200).json(users);
-  } catch (error) {
-    console.error("Error fetching all users:", error);
-    res.status(500).json({ msg: "Failed to fetch users" });
-  }
-});
+router.get("/all", verifyToken, adminMiddleware, getAllUsers);
 
 module.exports = router;

@@ -26,6 +26,7 @@ export default function App() {
         <Route path="/" element={<RealmGate />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/admin" element={<AdminPanel />} />
 
         {/* 🔐 Protected Routes */}
         <Route
