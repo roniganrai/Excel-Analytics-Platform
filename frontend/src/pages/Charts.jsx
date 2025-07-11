@@ -1,11 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  Bar,
-  Pie,
-  Line,
-  Radar,
-  Doughnut,
-} from "react-chartjs-2";
+import Plot from "react-plotly.js";
+
+import { Bar, Pie, Line, Radar, Doughnut } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   BarElement,
@@ -18,6 +14,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Link } from "react-router-dom";
@@ -28,7 +25,7 @@ import Footer from "../components/Footer";
 
 import detectiveBg from "../assests/b.gif";
 
-// ✅ Chart.js registration
+// Register Chart.js components
 ChartJS.register(
   BarElement,
   CategoryScale,
@@ -51,7 +48,6 @@ export default function Charts() {
   const [isDark, setIsDark] = useState(true);
   const chartRef = useRef();
 
-  // ⏬ Load data from localStorage
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("excelData"));
     if (data?.length) {
@@ -95,15 +91,52 @@ export default function Charts() {
     ],
   };
 
+  const ThreeDChart = (
+    <Plot
+      data={[
+        {
+          type: "scatter3d",
+          mode: "markers",
+          x: excelData.map((row) => row[xAxis]),
+          y: excelData.map((row) => (yAxis.length > 0 ? row[yAxis[0]] : 0)),
+          z: excelData.map((_, i) => i + 1),
+          marker: {
+            size: 6,
+            color: excelData.map((row) =>
+              yAxis.length > 0 ? parseFloat(row[yAxis[0]]) || 0 : 0
+            ),
+            colorscale: "Viridis",
+          },
+        },
+      ]}
+      layout={{
+        autosize: true,
+        height: 500,
+        paper_bgcolor: isDark ? "#000" : "#fff",
+        font: { color: isDark ? "#fff" : "#000" },
+        scene: {
+          xaxis: { title: xAxis },
+          yaxis: { title: yAxis[0] || "Y" },
+          zaxis: { title: "Index" },
+          camera: {
+            eye: { x: 1.5, y: 1.5, z: 1.5 },
+          },
+        },
+      }}
+      useResizeHandler
+      style={{ width: "100%", height: "100%" }}
+    />
+  );
+
   const ChartComponent = {
     Bar: <Bar data={chartData} />,
     Line: <Line data={chartData} />,
     Radar: <Radar data={chartData} />,
     Pie: <Pie data={pieDoughnutData} />,
     Doughnut: <Doughnut data={pieDoughnutData} />,
+    "3D": ThreeDChart,
   }[chartType];
 
-  // 📥 Save as PNG
   const downloadAsImage = async () => {
     const canvas = await html2canvas(chartRef.current);
     const link = document.createElement("a");
@@ -112,7 +145,6 @@ export default function Charts() {
     link.click();
   };
 
-  // 🧾 Save as PDF
   const downloadAsPDF = async () => {
     const canvas = await html2canvas(chartRef.current);
     const imgData = canvas.toDataURL("image/png");
@@ -132,13 +164,15 @@ export default function Charts() {
         backgroundPosition: "center",
       }}
     >
-      {/* Dark Overlay */}
       {isDark && (
         <div className="absolute inset-0 bg-black/80 backdrop-blur-md z-0" />
       )}
 
       <NavbarMain onToggleDrawer={() => setIsDrawerOpen(true)} />
-      <SidebarDrawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
+      <SidebarDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+      />
 
       <main className="relative z-10 px-6 py-12 max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-6">
@@ -153,20 +187,28 @@ export default function Charts() {
           </button>
         </div>
 
-        {/* 🔁 Navigation */}
         <div className="flex flex-wrap gap-4 mb-10">
-          <Link to="/upload" className="btn-glow text-sm">🧾 Upload File</Link>
-          <Link to="/history" className="btn-glow text-sm">📁 File History</Link>
-          <Link to="/chat" className="btn-glow text-sm">🧠 Interrogate AI</Link>
-          <Link to="/home" className="btn-glow text-sm">🏠 Home</Link>
+          <Link to="/upload" className="btn-glow text-sm">
+            🧾 Upload File
+          </Link>
+          <Link to="/history" className="btn-glow text-sm">
+            📁 File History
+          </Link>
+          <Link to="/chat" className="btn-glow text-sm">
+            🧠 Interrogate AI
+          </Link>
+          <Link to="/home" className="btn-glow text-sm">
+            🏠 Home
+          </Link>
         </div>
 
-        {/* 📊 Chart Config */}
         {excelData.length > 0 ? (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
               <div>
-                <label className="block text-sm mb-1 text-cyan-300">📌 X-Axis</label>
+                <label className="block text-sm mb-1 text-cyan-300">
+                  📌 X-Axis
+                </label>
                 <select
                   value={xAxis}
                   onChange={(e) => setXAxis(e.target.value)}
@@ -179,12 +221,16 @@ export default function Charts() {
               </div>
 
               <div>
-                <label className="block text-sm mb-1 text-cyan-300">📈 Y-Axis</label>
+                <label className="block text-sm mb-1 text-cyan-300">
+                  📈 Y-Axis
+                </label>
                 <select
                   multiple
                   value={yAxis}
                   onChange={(e) =>
-                    setYAxis(Array.from(e.target.selectedOptions, (o) => o.value))
+                    setYAxis(
+                      Array.from(e.target.selectedOptions, (o) => o.value)
+                    )
                   }
                   className="w-full p-2 border rounded text-black h-32"
                 >
@@ -195,7 +241,9 @@ export default function Charts() {
               </div>
 
               <div>
-                <label className="block text-sm mb-1 text-cyan-300">📊 Chart Type</label>
+                <label className="block text-sm mb-1 text-cyan-300">
+                  📊 Chart Type
+                </label>
                 <select
                   value={chartType}
                   onChange={(e) => setChartType(e.target.value)}
@@ -206,11 +254,11 @@ export default function Charts() {
                   <option value="Radar">Radar</option>
                   <option value="Pie">Pie</option>
                   <option value="Doughnut">Doughnut</option>
+                  <option value="3D">3D Scatter</option>
                 </select>
               </div>
             </div>
 
-            {/* 🖼️ Chart Preview */}
             <div
               ref={chartRef}
               className="bg-black/70 p-6 rounded-lg border border-cyan-500 shadow-lg mb-6"
@@ -219,24 +267,30 @@ export default function Charts() {
               {ChartComponent}
             </div>
 
-            {/* ⬇️ Download Options */}
             <div className="flex gap-4 justify-center mb-8">
-              <button onClick={downloadAsImage} className="btn-glow px-4 py-2 text-sm">
+              <button
+                onClick={downloadAsImage}
+                className="btn-glow px-4 py-2 text-sm"
+              >
                 📸 Download Image
               </button>
-              <button onClick={downloadAsPDF} className="btn-glow px-4 py-2 text-sm">
+              <button
+                onClick={downloadAsPDF}
+                className="btn-glow px-4 py-2 text-sm"
+              >
                 🧾 Download PDF
               </button>
             </div>
 
-            {/* 🧮 Data Table */}
             <div className="overflow-auto bg-black/60 border border-cyan-400 rounded-lg p-4 text-sm max-h-96">
               <h3 className="text-cyan-300 mb-2">🔍 Data Preview</h3>
               <table className="min-w-full text-left">
                 <thead className="border-b border-cyan-600">
                   <tr>
                     {columns.map((key) => (
-                      <th key={key} className="px-2 py-1">{key}</th>
+                      <th key={key} className="px-2 py-1">
+                        {key}
+                      </th>
                     ))}
                   </tr>
                 </thead>
@@ -244,7 +298,9 @@ export default function Charts() {
                   {excelData.map((row, idx) => (
                     <tr key={idx} className="border-t border-cyan-700">
                       {columns.map((col) => (
-                        <td key={col} className="px-2 py-1">{row[col] ?? ""}</td>
+                        <td key={col} className="px-2 py-1">
+                          {row[col] ?? ""}
+                        </td>
                       ))}
                     </tr>
                   ))}
@@ -261,7 +317,6 @@ export default function Charts() {
 
       <Footer />
 
-      {/* 🌟 Custom Styles */}
       <style>{`
         .font-detective {
           font-family: 'Courier New', Courier, monospace;
