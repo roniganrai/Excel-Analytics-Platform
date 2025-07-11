@@ -12,11 +12,9 @@ import History from "./pages/History";
 import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
-import AdminPanel from "./pages/AdminPanel";
 
 // 🛡️ Route Guard
 import ProtectedRoute from "./components/ProtectedRoute";
-import RequireAdmin from "./components/RequireAdmin";
 
 export default function App() {
   return (
@@ -82,14 +80,6 @@ export default function App() {
             <ProtectedRoute>
               <Settings />
             </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <RequireAdmin>
-              <AdminPanel />
-            </RequireAdmin>
           }
         />
       </Routes>

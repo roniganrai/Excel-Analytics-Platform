@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getAllUsers } = require("../controllers/userController");
 const verifyToken = require("../middleware/authMiddleware");
-const adminMiddleware = require("../middleware/adminMiddleware");
 const User = require("../models/User");
 
 // 👤 GET: Logged-in user profile
@@ -35,8 +33,5 @@ router.put("/update", verifyToken, async (req, res) => {
     res.status(500).json({ msg: "Profile update failed" });
   }
 });
-
-// 🔐 GET: Admin-only - fetch all users
-router.get("/all", verifyToken, adminMiddleware, getAllUsers);
 
 module.exports = router;
